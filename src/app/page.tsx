@@ -8,7 +8,7 @@ export default function Home() {
 
       <div>
         <label>GitHub repo URL</label>&nbsp;
-        <input placeholder='ex: https://github.com/octocat/Hello-World'></input>
+        <input placeholder="ex: https://github.com/octocat/Hello-World"></input>
         <hr />
         <button>Submit</button>
       </div>
