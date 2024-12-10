@@ -12,6 +12,7 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "git-url-parse": "^16.0.0",
     "lucide-react": "^0.468.0",
     "next": "15.0.4",
     "react": "^19.0.0",
@@ -23,6 +24,7 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.1.0",
+    "@types/git-url-parse": "^9.0.3",
     "@types/jest": "^29.5.14",
     "@types/node": "^20",
     "@types/react": "^19",
