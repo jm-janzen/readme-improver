@@ -41,8 +41,8 @@ const githubPull = async (data: { url: string, token: string }) => {
 
     const { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
     console.log({ path, sha, content: ogContent })
-    //const content = ogContent + btoa('\nquack') // FIXME Why are new quacks on same line?
-    const content = ogContent + Buffer.from('\nquack', 'binary').toString('base64')
+
+    const content = btoa(atob(ogContent) + '\nquack\n')
 
     const pushResp = await octokit.request(`PUT /repos/${owner}/${repo}/contents/${path}`, {
         headers,
