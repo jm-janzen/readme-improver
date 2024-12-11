@@ -19,7 +19,6 @@ export default function App() {
 
         const form = new FormData(event.currentTarget)
         const url = form.get('git-url')
-        console.debug({url})
         try {
             const {
                 source,
@@ -48,7 +47,6 @@ export default function App() {
     async function onSubmitToken(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        console.dir({formData})
         const { url } = formData
         const form = new FormData(event.currentTarget)
         const token = form.get('github-pat') as string
@@ -69,11 +67,9 @@ export default function App() {
     async function onSubmitQuack(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        console.dir({formData})
         const { url, token } = formData
         try {
             const body = JSON.stringify({ url, token })
-            console.debug({body})
             const response = await fetch('/api/submit-git-url', {
                 method: 'POST',
                 body,

@@ -41,7 +41,6 @@ const githubUsingToken = async (data: { url: string, token: string }) => {
     const { owner, name: repo } = GitUrlParse(data.url)
 
     const { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
-    console.log({ path, sha, content: ogContent })
 
     const content = btoa(atob(ogContent) + '\nquack\n')
 
