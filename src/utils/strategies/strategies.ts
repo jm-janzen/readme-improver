@@ -12,11 +12,11 @@ type Strategy = (data: GithubData) => {
 
 /**
  * @throws Error if unable to find strategy for given gitUrl
- * @param gitUrl url to git resource
+ * @param url to git resource
  * @returns string used as key by execStrategy fn
  */
-export const getStrategy = (gitUrl: string) => {
-    const parsedUrl = GitUrlParse(gitUrl)
+export const getStrategy = (url: string) => {
+    const parsedUrl = GitUrlParse(url)
     const strategy = repoStrategies[parsedUrl.resource]
     if (!strategy) {
         throw new Error(`Unsupported git resource '${parsedUrl.resource}'`)
@@ -30,13 +30,13 @@ export const execStrategy = (strategy: Strategy, data: GithubData) => {
 }
 
 const githubStrategy: Strategy = (data) => {
-    return githubPull(data)
+    return githubUsingToken(data)
 }
 
-const githubPull = async (data: { url: string, token: string }) => {
+const githubUsingToken = async (data: { url: string, token: string }) => {
     const headers = { 'X-GitHub-Api-Version': '2022-11-28' }
     const octokit = new Octokit({ auth: data.token })
-    const { owner, name: repo } = GitUrlParse(data.gitUrl)
+    const { owner, name: repo } = GitUrlParse(data.url)
 
     const { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
     console.log({ path, sha, content: ogContent })

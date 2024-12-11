@@ -9,16 +9,16 @@ export default function Home() {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
-        const gitUrl = formData.get('git-url')
+        const url = formData.get('git-url')
         const token = formData.get('github-pat')
-        const body = JSON.stringify({ gitUrl, token })
+        const body = JSON.stringify({ url, token })
         const response = await fetch('/api/submit-git-url', {
           method: 'POST',
           body,
         })
         const data = await response.json()
 
-        console.log(`Attempted to look up the git URL ${gitUrl} (success: ${data.success})`, data)
+        console.log(`Attempted to look up the git URL ${url} (success: ${data.success})`, data)
 
         // Now how do I translate this into action...
         return { todo: true }

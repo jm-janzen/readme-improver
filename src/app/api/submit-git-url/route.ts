@@ -4,8 +4,8 @@ import { getStrategy, execStrategy } from '../../../utils/strategies/strategies'
 export async function POST(req: NextRequest) {
     const data = await req.json()
 
-    const strategy = getStrategy(data.gitUrl)
-    const result = await execStrategy(strategy, 'clone', data)
+    const strategy = getStrategy(data.url)
+    const result = await execStrategy(strategy, data)
 
     return res.json({
         success: true,
