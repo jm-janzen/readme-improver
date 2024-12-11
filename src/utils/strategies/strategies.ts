@@ -7,8 +7,10 @@ type GithubData = {
     token: string,
     path: string,
 }
-type Strategy = (data: GithubData) => {
-}
+type Strategy = (data: GithubData) => {}
+
+export const supportedSources = [ 'github.com' ]
+export const supportedProtocols = [ 'https' ]
 
 /**
  * @throws Error if unable to find strategy for given gitUrl
