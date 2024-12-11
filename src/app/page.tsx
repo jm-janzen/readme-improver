@@ -1,24 +1,24 @@
 'use client'
 
-import React from 'react';
-import {Tabs, Tab, Input, Link, Button, Card, CardBody, Tooltip} from '@nextui-org/react';
+import React from 'react'
+import {Tabs, Tab, Input, Link, Button, Card, CardBody, Tooltip} from '@nextui-org/react'
 import { FormEvent } from 'react'
 import { supportedSources, supportedProtocols } from '@/utils/strategies'
 import GitUrlParse from 'git-url-parse'
-import { validateToken } from '@/utils/github.com/validate-token';
+import { validateToken } from '@/utils/github.com/validate-token'
 
 
 export default function App() {
-  const [selected, setSelected] = React.useState('repo');
+  const [selected, setSelected] = React.useState('repo')
   const [disabled, setDisabled] = React.useState(['auth', 'quack'])
-  const [formData, setFormData] = React.useState({})
+  const [formData, setFormData] = React.useState({} as { url: string, token: string })
   const [quacking, setQuacking] = React.useState(false)
 
     async function onSubmitUrl(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
         const form = new FormData(event.currentTarget)
-        const url = form.get('git-url')
+        const url = form.get('git-url') as string
         try {
             const {
                 source,
@@ -51,6 +51,7 @@ export default function App() {
         const form = new FormData(event.currentTarget)
         const token = form.get('github-pat') as string
         try {
+            setQuacking(true)
 
             await validateToken({ url, token })
 
@@ -63,6 +64,8 @@ export default function App() {
             setSelected('repo')
             setDisabled(['auth', 'quack'])
         }
+
+        setQuacking(false)
     }
     async function onSubmitQuack(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -72,7 +75,7 @@ export default function App() {
             setQuacking(true)
 
             const body = JSON.stringify({ url, token })
-            const response = await fetch('/api/quack', {
+            await fetch('/api/quack', {
                 method: 'POST',
                 body,
             })
@@ -119,7 +122,7 @@ export default function App() {
                                 </p>
                                 <div className="flex gap-2 justify-end">
                                     <Tooltip color="warning" delay={500} placement="bottom" content="Requires scope 'Read and Write access to code'">
-                                        <Button fullWidth color="primary" type="submit">
+                                        <Button fullWidth isDisabled={quacking} isLoading={quacking} color="primary" type="submit">
                                             Authenticate Token
                                         </Button>
                                     </Tooltip>
@@ -139,5 +142,5 @@ export default function App() {
                 </CardBody>
             </Card>
         </div>
-    );
+    )
 }
