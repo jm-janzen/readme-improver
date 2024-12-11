@@ -3,8 +3,7 @@
 import React from 'react';
 import {Tabs, Tab, Input, Link, Button, Card, CardBody} from '@nextui-org/react';
 import { FormEvent } from 'react'
-// FIXME Make import nicer
-import { supportedSources, supportedProtocols } from '@/utils/strategies/strategies'
+import { supportedSources, supportedProtocols } from '@/utils/strategies'
 import GitUrlParse from 'git-url-parse'
 import { validateToken } from '@/utils/github.com/validate-token';
 
