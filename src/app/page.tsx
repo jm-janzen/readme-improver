@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react';
-import {Tabs, Tab, Input, Link, Button, Card, CardBody} from '@nextui-org/react';
+import {Tabs, Tab, Input, Link, Button, Card, CardBody, Tooltip} from '@nextui-org/react';
 import { FormEvent } from 'react'
 import { supportedSources, supportedProtocols } from '@/utils/strategies'
 import GitUrlParse from 'git-url-parse'
@@ -12,6 +12,7 @@ export default function App() {
   const [selected, setSelected] = React.useState('repo');
   const [disabled, setDisabled] = React.useState(['auth', 'quack'])
   const [formData, setFormData] = React.useState({})
+  const [quacking, setQuacking] = React.useState(false)
 
     async function onSubmitUrl(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
@@ -68,6 +69,8 @@ export default function App() {
 
         const { url, token } = formData
         try {
+            setQuacking(true)
+
             const body = JSON.stringify({ url, token })
             const response = await fetch('/api/quack', {
                 method: 'POST',
@@ -79,6 +82,8 @@ export default function App() {
             setSelected('auth')
             setDisabled(['quack'])
         }
+
+        setQuacking(false)
     }
 
     return (
@@ -124,7 +129,7 @@ export default function App() {
                         <Tab key="quack" title="Quack">
                             <form onSubmit={onSubmitQuack} className="flex flex-col gap-4 h-[50px]">
                                 <div className="flex gap-2 justify-end">
-                                    <Button fullWidth color="primary" type="submit">
+                                    <Button fullWidth isDisabled={quacking} isLoading={quacking} color="primary" type="submit">
                                         Quack!
                                     </Button>
                                 </div>
