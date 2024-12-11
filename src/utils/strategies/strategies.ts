@@ -2,13 +2,12 @@ import GitUrlParse from 'git-url-parse'
 import { Octokit } from '@octokit/core'
 
 
-type Operations = 'clone' | 'modify' | 'push'
 type GithubData = {
     url: string,
     token: string,
     path: string,
 }
-type Strategy = (op: string, data: GithubData) => {
+type Strategy = (data: GithubData) => {
 }
 
 /**
@@ -26,11 +25,11 @@ export const getStrategy = (gitUrl: string) => {
     return strategy
 }
 
-export const execStrategy = (strategy: Strategy, op: Operations, data: GithubData) => {
-    return strategy(op, data)
+export const execStrategy = (strategy: Strategy, data: GithubData) => {
+    return strategy(data)
 }
 
-const githubStrategy: Strategy = (op, data) => {
+const githubStrategy: Strategy = (data) => {
     return githubPull(data)
 }
 
@@ -44,7 +43,7 @@ const githubPull = async (data: { url: string, token: string }) => {
 
     const content = btoa(atob(ogContent) + '\nquack\n')
 
-    const pushResp = await octokit.request(`PUT /repos/${owner}/${repo}/contents/${path}`, {
+    await octokit.request(`PUT /repos/${owner}/${repo}/contents/${path}`, {
         headers,
         content,
         owner,
