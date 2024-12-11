@@ -1,10 +1,14 @@
 import GitUrlParse from 'git-url-parse'
+import { Octokit } from '@octokit/core'
 
 
-type Strategy = (op: string, url: string) => {
-    success: boolean,
-    message: string,
-    result: object,
+type Operations = 'clone' | 'modify' | 'push'
+type GithubData = {
+    url: string,
+    token: string,
+    path: string,
+}
+type Strategy = (op: string, data: GithubData) => {
 }
 
 /**
@@ -22,23 +26,39 @@ export const getStrategy = (gitUrl: string) => {
     return strategy
 }
 
-export const execStrategy = (strategy: Strategy, op: 'clone', url: string) => {
-    return strategy(op, url)
+export const execStrategy = (strategy: Strategy, op: Operations, data: GithubData) => {
+    return strategy(op, data)
 }
 
-const githubStrategy: Strategy = (data) => {
-    const result = {
-        repo: {
-            name: 'todo',
-            localPath: 'todo',
-        }
-    }
+const githubStrategy: Strategy = (op, data) => {
+    return githubPull(data)
+}
 
-    return {
-        success: true,
-        message: `ran github strategy on ${data}`,
-        result,
-    }
+const githubPull = async (data: { url: string, token: string }) => {
+    const headers = { 'X-GitHub-Api-Version': '2022-11-28' }
+    const octokit = new Octokit({ auth: data.token })
+    const { owner, name: repo } = GitUrlParse(data.gitUrl)
+
+    const { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
+    console.log({ path, sha, content: ogContent })
+    //const content = ogContent + btoa('\nquack') // FIXME Why are new quacks on same line?
+    const content = ogContent + Buffer.from('\nquack', 'binary').toString('base64')
+
+    const pushResp = await octokit.request(`PUT /repos/${owner}/${repo}/contents/${path}`, {
+        headers,
+        content,
+        owner,
+        repo,
+        path,
+        sha,
+        message: 'docs: added missing quack',
+        committer: {
+            name: 'Duck',
+            email: 'jmjanzen@duck.com',
+        },
+    })
+
+    return { repo, path, content: atob(content) }
 }
 
 const repoStrategies: { [key: string]: Strategy } = {

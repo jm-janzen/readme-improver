@@ -9,14 +9,16 @@ export default function Home() {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
-        const body = JSON.stringify({ gitUrl: formData.get('git-url') })
+        const gitUrl = formData.get('git-url')
+        const token = formData.get('github-pat')
+        const body = JSON.stringify({ gitUrl, token })
         const response = await fetch('/api/submit-git-url', {
           method: 'POST',
           body,
         })
         const data = await response.json()
 
-        console.log(`Attempted to look up the git URL ${data.gitUrl} (success: ${data.success})`)
+        console.log(`Attempted to look up the git URL ${gitUrl} (success: ${data.success})`, data)
 
         // Now how do I translate this into action...
         return { todo: true }
@@ -30,6 +32,10 @@ export default function Home() {
                 <form onSubmit={onSubmit}>
                     <label>GitHub repo URL</label>&nbsp;
                     <input name="git-url" placeholder="ex: https://github.com/octocat/Hello-World" />
+                    <br />
+                    <label>GitHub Token</label>&nbsp;
+                    <input name="github-pat" placeholder="ex: github_pat_XYZ" />
+                    <br />
                     <button type="submit">Submit</button>
                 </form>
             </div>
