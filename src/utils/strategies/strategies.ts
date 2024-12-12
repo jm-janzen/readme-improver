@@ -18,7 +18,6 @@ export const supportedProtocols = [ 'https' ]
  * @returns string used as key by execStrategy fn
  */
 export const getStrategy = (url: string) => {
-    console.dir({url})
     const parsedUrl = GitUrlParse(url)
     const strategy = repoStrategies[parsedUrl.resource]
     if (!strategy) {
