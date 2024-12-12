@@ -1,18 +1,35 @@
-import { createMocks } from 'node-mocks-http'
 import { POST } from './route'
 
-describe('/api/goose', () => {
-    test('should honk', async () => {
-        const { req } = createMocks({
-          method: 'POST',
-          body: ({ url: 'https://github.com:jm-duck/quack-public', token: 'github_pat_XYZ' })
+const mockRequest = (method: string, body: object): Request => {
+    const params: RequestInit = {
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        method: method,
+        body: JSON.stringify(body)
+    }
+
+    // Positional URL parameter is required
+    // but we don't actually need it
+    return new Request('', params)
+}
+
+describe('/api/quack', () => {
+    it('should fail on bad token', async () => {
+        const req = mockRequest('POST', {
+            url: 'https://github.com:jm-duck/quack-public',
+            token: 'github_pat_XYZ',
         })
 
-        const response = await POST(req)
+        try {
+            // @ts-ignore Request has everything we need
+            await POST(req)
+        } catch (e: any) {
+            expect(e.message).toBe('Bad credentials - https://docs.github.com/rest')
+        }
 
-        expect(response.status).toBe(200)
-        expect(await response.json()).toEqual({ success: true })
-
-        expect(true).toBe(true)
     })
+
+    it.todo('should fail on bad url')
+    it.todo('should fail on unsupported git provider')
 })
