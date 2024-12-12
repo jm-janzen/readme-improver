@@ -41,6 +41,8 @@ export default function App() {
             console.error(e)
 
             setDisabled(['auth', 'quack'])
+
+            throw new Error('Failed to parse this git URL')
         }
 
     }
@@ -63,6 +65,8 @@ export default function App() {
 
             setSelected('repo')
             setDisabled(['auth', 'quack'])
+
+            throw new Error('Token not valid')
         }
 
         setQuacking(false)
@@ -84,6 +88,8 @@ export default function App() {
 
             setSelected('auth')
             setDisabled(['quack'])
+
+            throw new Error('Failed to quack :C')
         }
 
         setQuacking(false)
