@@ -1,8 +1,7 @@
-import GitUrlParse from 'git-url-parse'
 import { Octokit } from '@octokit/core'
 
 
-export const validateToken = async (data: { url: string, token: string }) => {
+export const validateToken = async (data: { token: string }) => {
     const headers = { 'X-GitHub-Api-Version': '2022-11-28' }
     const octokit = new Octokit({ auth: data.token })
 
