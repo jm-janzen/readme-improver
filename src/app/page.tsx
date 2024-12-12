@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import {Tabs, Tab, Input, Link, Button, Card, CardBody, Tooltip} from '@nextui-org/react'
+import {Tabs, Tab, Input, Link, Button, Card, CardBody, Tooltip, Alert, CardHeader, Image, Divider} from '@nextui-org/react'
 import { FormEvent } from 'react'
 import { supportedSources, supportedProtocols } from '@/utils/strategies'
 import GitUrlParse from 'git-url-parse'
@@ -91,7 +91,21 @@ export default function App() {
 
     return (
         <div className="flex flex-col w-full">
-            <Card className="max-w-full w-[50%] h-[50%]">
+            <Card className="max-w-full w-[600px] h-[50%]">
+                <CardHeader className="flex gap-3">
+                    <Image
+                        alt="JM Janzen outdoors with his friend Maisy the cat"
+                        height={50}
+                        width={50}
+                        radius="lg"
+                        src="https://avatars.githubusercontent.com/u/7889902?s=200&v=4"
+                    />
+                    <div className="flex flex-col">
+                        <p className="text-md">Git README "Improver"</p>
+                        <p className="text-small text-default-500">Adds much needed quacks to otherwise duckless documentation</p>
+                    </div>
+                </CardHeader>
+                <Divider />
                 <CardBody className="overflow-hidden">
                     <Tabs
                         fullWidth
@@ -140,6 +154,9 @@ export default function App() {
                         </Tab>
                     </Tabs>
                 </CardBody>
+
+                <Alert isVisible={false} variant='faded' color={'danger'} title={'TODO'} />
+
             </Card>
         </div>
     )
