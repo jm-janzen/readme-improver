@@ -1,15 +1,12 @@
 import { NextRequest, NextResponse as res } from 'next/server'
 import { getStrategy, execStrategy } from '../../../utils/strategies/strategies' // FIXME make nicer import path
 
-export async function POST(req: any) {
-    const data = await req.body//json()
+export async function POST(req: NextRequest) {
+    const data = await req.json()
 
     const strategy = getStrategy(data.url)
-    const result = await execStrategy(strategy, data)
 
-    //return res.json({
-    return ({
-        status: 200,
-        json: async () => ({ success: true }),
-    })
+    await execStrategy(strategy, data)
+
+    return res.json({ success: true })
 }
