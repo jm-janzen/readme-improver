@@ -1,3 +1,12 @@
+/**
+ * Exports a basic mock which is automatically used by jest
+ * This mock is designed to:
+ *  1. Fail if instantiated with a bad token
+ *  2.
+ *
+ * 'Good' and 'bad' parameters are determined by the magic strings
+ * defined within this mock (the word 'BAD' or references to geese)
+ */
 export const Octokit = jest.fn().mockImplementation((params: any) => {
     if (params.auth == 'TOKEN_BAD') {
         throw new Error('Bad credentials - https://docs.github.com/rest')

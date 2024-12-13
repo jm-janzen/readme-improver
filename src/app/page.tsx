@@ -55,7 +55,7 @@ export default function App() {
         try {
             setQuacking(true)
 
-            await validateToken({ url, token })
+            await validateToken({ token })
 
             setFormData({...formData, ...{ token }})
             setSelected('quack')
