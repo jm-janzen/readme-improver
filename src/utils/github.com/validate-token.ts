@@ -1,11 +1,11 @@
 import { Octokit } from '@octokit/core'
 
 
-export const validateToken = async (data: { token: string }) => {
+export const validateToken = async (data: { token: string }): Promise<boolean> => {
     const headers = { 'X-GitHub-Api-Version': '2022-11-28' }
     const octokit = new Octokit({ auth: data.token })
 
     const resp = await octokit.request(`GET /octocat`, { headers })
 
-    return resp
+    return resp.status == 200
 }
