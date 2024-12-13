@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse as res } from 'next/server'
+import type { NextRequest } from 'next/server'
 import { getStrategy, execStrategy } from '@/utils/strategies'
 
 export async function POST(req: NextRequest) {
@@ -8,5 +8,5 @@ export async function POST(req: NextRequest) {
 
     await execStrategy(strategy, data)
 
-    return res.json({ success: true })
+    return Response.json({ success: true })
 }
