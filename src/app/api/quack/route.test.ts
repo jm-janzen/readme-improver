@@ -28,7 +28,6 @@ describe('/api/quack', () => {
         })
 
         try {
-            // @ts-ignore Request has everything we need
             await POST(req)
         } catch (e: any) {
             expect(e.message).toBe('Bad credentials - https://docs.github.com/rest')
@@ -46,7 +45,6 @@ describe('/api/quack', () => {
             token: 'TOKEN_GOOD',
         })
 
-        // @ts-ignore Request has everything we need
         await POST(req)
 
     })
