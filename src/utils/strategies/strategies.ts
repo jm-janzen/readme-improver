@@ -23,6 +23,9 @@ export const getStrategy = (url: string) => {
     if (!strategy) {
         throw new Error(`Unsupported git resource '${parsedUrl.resource}'`)
     }
+    if (!supportedProtocols.includes(parsedUrl.protocol)) {
+        throw new Error(`Unsupported git protocol '${parsedUrl.protocol}'`)
+    }
 
     return strategy
 }
