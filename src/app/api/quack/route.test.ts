@@ -1,12 +1,18 @@
 import { POST } from './route'
 
+/**
+ * This Request builder exists to pass NextRequest-like payloads
+ * the endpoints to our api routes while using the fancy app router
+ *
+ * @param method the usual
+ * @param body
+ * @returns
+ */
 const mockRequest = (method: string, body: object): Request => {
     const params: RequestInit = {
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        method: method,
-        body: JSON.stringify(body)
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        method,
     }
 
     // Positional URL parameter is required
@@ -17,8 +23,8 @@ const mockRequest = (method: string, body: object): Request => {
 describe('/api/quack', () => {
     it('should fail on bad token', async () => {
         const req = mockRequest('POST', {
-            url: 'https://github.com:jm-duck/quack-public',
-            token: 'github_pat_XYZ',
+            url: 'https://github.com/jm-duck/quack-public',
+            token: 'TOKEN_BAD',
         })
 
         try {
@@ -30,6 +36,19 @@ describe('/api/quack', () => {
 
     })
 
-    it.todo('should fail on bad url')
-    it.todo('should fail on unsupported git provider')
+    it('should succeed', async () => {
+        // FIXME Find a more elegant way fix Next/Response
+        // in the global jest environment
+        Response.json = async () => { success: true }
+
+        const req = mockRequest('POST', {
+            url: 'https://github.com/DUCK/QUACK',
+            token: 'TOKEN_GOOD',
+        })
+
+        // @ts-ignore Request has everything we need
+        await POST(req)
+
+    })
+
 })
