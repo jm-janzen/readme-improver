@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse as res } from 'next/server'
-import { getStrategy, execStrategy } from '../../../utils/strategies/strategies' // FIXME make nicer import path
+import { getStrategy, execStrategy } from '@/utils/strategies'
 
 export async function POST(req: NextRequest) {
     const data = await req.json()
