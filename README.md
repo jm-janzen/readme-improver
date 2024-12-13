@@ -1,40 +1,28 @@
+# README Improver 🦆
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+The application improves the README file of any git repository you have access to, all from your handy browser window.
 
-First, run the development server:
+![A single-input form with the tabs 'Repo', 'Authenticate', and 'Quack'](./public/example.png 'Landing page')
+
+## Launching dev
+
+After installing the NPM dependencies, run
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) with your browser and follow the prompts on the form.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Notes
 
-## Learn More
+Error feedback in almost non-existent, so you'll have to either look in your terminal or your browser's network tab if you encounter issues.
 
-To learn more about Next.js, take a look at the following resources:
+Currently only supports GitHub HTTPS URLs in the form of `https://github.com/jm-janzen/readme-improver`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+I also sincerely apologise that clicking the 'Quack' button does not actually produce a quacking sound. 😔
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-quack
-
-quack
