@@ -43,8 +43,14 @@ const githubUsingToken = async (data: { url: string, token: string }) => {
     const octokit = new Octokit({ auth: data.token })
     const { owner, name: repo } = GitUrlParse(data.url)
 
-    const { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
+    try {
+        // Hoist outside of our try
+        var { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
+    } catch (_e: any) {
+        throw new Error(`Failed to get readme data for ${owner}/${repo}`)
+    }
 
+    // FIXME To be extra friendly, we could check the encoding before concatenating
     const content = btoa(atob(ogContent) + '\nquack\n')
 
     await octokit.request(`PUT /repos/${owner}/${repo}/contents/${path}`, {
