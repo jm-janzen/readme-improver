@@ -1,6 +1,6 @@
 # README Improver 🦆
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app), and [NextUI](https://nextui.org/).
 
 The application improves the README file of any git repository you have access to, all from your handy browser window.
 
@@ -20,7 +20,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser and follow
 
 ### Notes
 
-Error feedback in almost non-existent, so you'll have to either look in your terminal or your browser's network tab if you encounter issues.
+Error feedback is almost non-existent, so you'll have to either look in your terminal or your browser's network tab if you encounter issues.
 
 Currently only supports GitHub HTTPS URLs in the form of `https://github.com/jm-janzen/readme-improver`.
 
