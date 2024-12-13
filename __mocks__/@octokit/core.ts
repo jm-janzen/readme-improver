@@ -14,6 +14,10 @@ export const Octokit = jest.fn().mockImplementation((params: any) => {
 
     return {
         request: jest.fn().mockImplementation((uri: any) => {
+            // For validating token
+            if (uri == 'GET /octocat') {
+                return { status: 200 }
+            }
             // For pulling down readme details
             if (uri == 'GET /repos/DUCK/QUACK/readme') {
                 return {
