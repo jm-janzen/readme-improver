@@ -9,10 +9,10 @@ import { validateToken } from '@/utils/github.com/validate-token'
 
 
 export default function App() {
-  const [selected, setSelected] = React.useState('repo')
-  const [disabled, setDisabled] = React.useState(['auth', 'quack'])
-  const [formData, setFormData] = React.useState({} as { url: string, token: string })
-  const [quacking, setQuacking] = React.useState(false)
+    const [selected, setSelected] = React.useState('repo')
+    const [disabled, setDisabled] = React.useState(['auth', 'quack'])
+    const [formData, setFormData] = React.useState({} as { url: string, token: string })
+    const [quacking, setQuacking] = React.useState(false)
 
     async function onSubmitUrl(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
