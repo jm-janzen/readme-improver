@@ -1,8 +1,6 @@
 /**
- * Exports a basic mock which is automatically used by jest
- * This mock is designed to:
- *  1. Fail if instantiated with a bad token
- *  2.
+ * Mocks { Octokit } from '@octokit/core' constructor,
+ * and `request` method.
  *
  * 'Good' and 'bad' parameters are determined by the magic strings
  * defined within this mock (the word 'BAD' or references to geese)

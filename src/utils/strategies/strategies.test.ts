@@ -15,7 +15,7 @@ describe('utils/strategies', () => {
         expect(strategy.name).toEqual('githubStrategy')
     })
     it('github fail: could not find repo or readme', async () => {
-        // expect().toThrow won't watch this, unforunately
+        // expect().toThrow won't catch this, unfortunately
         try {
             const githubStrategy = getStrategy('https://github.com/jm-goose/quack-private')
             await execStrategy(githubStrategy, {
