@@ -12,15 +12,10 @@
   "dependencies": {
     "@nextui-org/react": "^2.6.8",
     "@octokit/core": "^5.1.0",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
     "git-url-parse": "^16.0.0",
-    "lucide-react": "^0.468.0",
     "next": "^15.1.0",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tailwind-merge": "^2.5.5",
-    "tailwindcss-animate": "^1.0.7"
+    "react-dom": "^18.0.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^10.4.0",
