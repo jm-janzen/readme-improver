@@ -9,7 +9,7 @@ import { validateToken } from '@/utils/github.com/validate-token'
 
 
 export default function App() {
-    const [selected, setSelected] = React.useState(['repo'])
+    const [selected, setSelected] = React.useState('repo')
     const [disabled, setDisabled] = React.useState(['auth', 'quack'])
     const [formData, setFormData] = React.useState({} as { url: string, token: string })
     const [quacking, setQuacking] = React.useState(false)
@@ -34,7 +34,7 @@ export default function App() {
             }
 
             setFormData({...formData, ...{ url }})
-            setSelected(['auth'])
+            setSelected('auth')
             setDisabled(['quack'])
 
         } catch (e) {
@@ -58,12 +58,12 @@ export default function App() {
             await validateToken({ token })
 
             setFormData({...formData, ...{ token }})
-            setSelected(['quack'])
+            setSelected('quack')
             setDisabled([])
         } catch (e) {
             console.error(e)
 
-            setSelected(['repo'])
+            setSelected('repo')
             setDisabled(['auth', 'quack'])
 
             throw new Error('Token not valid')
@@ -86,7 +86,7 @@ export default function App() {
         } catch (e) {
             console.error(e)
 
-            setSelected(['auth'])
+            setSelected('auth')
             setDisabled(['quack'])
 
             throw new Error('Failed to quack :C')
@@ -116,9 +116,9 @@ export default function App() {
                     <Tabs
                         fullWidth
                         aria-label="Tabs form"
-                        selectedKey={selected as any}
+                        selectedKey={selected}
                         size="lg"
-                        onSelectionChange={setSelected as any}
+                        onSelectionChange={setSelected}
                         disabledKeys={disabled}
                     >
                         <Tab key="repo" title="Repo">
