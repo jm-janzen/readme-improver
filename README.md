@@ -24,7 +24,7 @@ Build image
 docker build -t readme-improver .
 ```
 
-Lol "deploy" it (I just discovered you can pipe these directly and I'm abusing it)
+Deploy as you see fit. For example, you could just pipe it over to remote like so (I just learned that you could do this and I'm determined to spread it around)
 
 ```bash
 docker save readme-improver:latest | gzip | ssh user@remote docker load
