@@ -7,7 +7,7 @@ export type GithubData = {
     token: string,
     path: string,
 }
-type Strategy = (data: GithubData) => {}
+type Strategy = (data: GithubData) => object
 
 export const supportedSources = [ 'github.com' ]
 export const supportedProtocols = [ 'https' ]
@@ -50,15 +50,15 @@ const githubStrategy: Strategy = (data) => {
  * @throws if cannot read or write to repo's README file
  * @returns object with repo, readme path, updated content
  */
-const githubUsingToken = async (data: { url: string, token: string }): Promise<any> => {
+const githubUsingToken = async (data: { url: string, token: string }): Promise<object> => {
     const headers = { 'X-GitHub-Api-Version': '2022-11-28' }
     const octokit = new Octokit({ auth: data.token })
     const { owner, name: repo } = GitUrlParse(data.url)
 
+    let path, sha, ogContent
     try {
-        // Hoist outside of our try
-        var { path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data
-    } catch (_e: any) {
+        ({ path, sha, content: ogContent } = (await octokit.request(`GET /repos/${owner}/${repo}/readme`)).data)
+    } catch {
         throw new Error(`Failed to get readme data for ${owner}/${repo}`)
     }
 

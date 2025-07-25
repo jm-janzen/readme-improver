@@ -1,6 +1,5 @@
 import type { NextRequest } from 'next/server'
 import { getStrategy, execStrategy } from '@/utils/strategies'
-import { GithubData } from '@/utils/strategies'
 
 /**
  *

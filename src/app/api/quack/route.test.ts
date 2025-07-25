@@ -29,7 +29,7 @@ describe('/api/quack', () => {
 
         try {
             await POST(req)
-        } catch (e: any) {
+        } catch (e) {
             expect(e.message).toBe('Bad credentials - https://docs.github.com/rest')
         }
 
@@ -38,7 +38,7 @@ describe('/api/quack', () => {
     it('should succeed', async () => {
         // FIXME Find a more elegant way fix Next/Response
         // in the global jest environment
-        Response.json = async () => { success: true }
+        Response.json = async () => Response
 
         const req = mockRequest('POST', {
             url: 'https://github.com/DUCK/QUACK',
