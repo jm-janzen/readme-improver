@@ -117,7 +117,7 @@ export default function App() {
                         aria-label="Tabs form"
                         selectedKey={selected}
                         size="lg"
-                        onSelectionChange={setSelected}
+                        onSelectionChange={(key) => setSelected(key as string)}
                         disabledKeys={disabled}
                     >
                         <Tab key="repo" title="Repo">
