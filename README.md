@@ -14,7 +14,23 @@ After installing the NPM dependencies, run
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser and follow the prompts on the form.
+Open [http://localhost:3434](http://localhost:3434) with your browser and follow the prompts on the form.
+
+## Deploying
+
+Build image
+
+```bash
+docker build -t readme-improver .
+```
+
+Lol "deploy" it (I just discovered you can pipe these directly and I'm abusing it)
+
+```bash
+docker save readme-improver:latest | gzip | ssh user@remote docker load
+
+ssh user@remote docker run -d -p 3434:3434 -t readme-improver:latest
+```
 
 ---
 
