@@ -5,7 +5,7 @@ describe('validate-token', () => {
     it('should fail on bad token', async () => {
         try {
             await validateToken({ token: 'TOKEN_BAD' })
-        } catch (e: any) {
+        } catch (e) {
             expect(e.message).toBe('Bad credentials - https://docs.github.com/rest')
         }
     })

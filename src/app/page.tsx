@@ -49,7 +49,6 @@ export default function App() {
     async function onSubmitToken(event: FormEvent<HTMLFormElement>) {
         event.preventDefault()
 
-        const { url } = formData
         const form = new FormData(event.currentTarget)
         const token = form.get('github-pat') as string
         try {

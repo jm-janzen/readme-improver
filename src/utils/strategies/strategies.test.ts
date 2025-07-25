@@ -23,7 +23,7 @@ describe('utils/strategies', () => {
                 token: 'TOKEN_GOOD',
                 path: 'README.md',
             })
-        } catch (e: any) {
+        } catch (e) {
             expect(e.message).toEqual('Failed to get readme data for GOOSE/HONK')
         }
     })
